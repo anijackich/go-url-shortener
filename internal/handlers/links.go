@@ -5,16 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-url-shortener/internal/repository"
 	"go-url-shortener/internal/service"
+	"go-url-shortener/internal/structs"
 	"net/http"
 )
-
-type LongLink struct {
-	URL string `json:"long_url"`
-}
-
-type ShortenedLink struct {
-	URL string `json:"short_url"`
-}
 
 type LinkHandler struct {
 	service service.LinkService
@@ -25,7 +18,7 @@ func NewLinkHandler(service service.LinkService) *LinkHandler {
 }
 
 func (h *LinkHandler) ShortenLink(c *gin.Context) {
-	var longLink LongLink
+	var longLink structs.LongLink
 
 	err := c.BindJSON(&longLink)
 	if err != nil {
@@ -50,7 +43,7 @@ func (h *LinkHandler) ShortenLink(c *gin.Context) {
 
 	c.JSON(
 		http.StatusOK,
-		ShortenedLink{
+		structs.ShortenedLink{
 			URL: shortenedLink,
 		},
 	)
@@ -74,7 +67,7 @@ func (h *LinkHandler) ExpandLink(c *gin.Context) {
 
 	c.JSON(
 		http.StatusOK,
-		LongLink{
+		structs.LongLink{
 			URL: expandedLink,
 		},
 	)

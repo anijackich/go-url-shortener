@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-url-shortener/internal/routers"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -37,11 +38,10 @@ func main() {
 
 	r := gin.Default()
 
+	r.Use(gin.Recovery())
+
 	v1 := r.Group("/api/v1")
-	{
-		v1.POST("/shorten", linkHandler.ShortenLink)
-		v1.GET("/expand", linkHandler.ExpandLink)
-	}
+	routers.SetupLinkRouter(v1, linkHandler)
 
 	err = r.Run(addr)
 	if err != nil {
