@@ -21,8 +21,6 @@ func (r *LinkRepository) CreateLink(link *models.Link) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	print(link.ShortCode)
-
 	if _, exists := r.links[link.ShortCode]; exists {
 		return repository.ErrLinkAlreadyExists
 	}
