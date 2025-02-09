@@ -18,7 +18,7 @@ type AppConfig struct {
 
 type DBConfig struct {
 	Host     string
-	Port     string
+	Port     int
 	Name     string
 	User     string
 	Password string
@@ -29,35 +29,41 @@ type Config struct {
 	DB  DBConfig
 }
 
-func toInt(s string) int {
-	num, err := strconv.Atoi(s)
-	if err != nil {
-		log.Fatalf("Cannot convert %s to int\n", s)
-	}
-
-	return num
-}
-
-func LoadConfig() *Config {
+func LoadConfig() (*Config, error) {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalln("No .env file found")
 	}
 
+	appPort, err := strconv.Atoi(os.Getenv("PORT"))
+	if err != nil {
+		return nil, err
+	}
+
+	dbPort, err := strconv.Atoi(os.Getenv("POSTGRES_PORT"))
+	if err != nil {
+		return nil, err
+	}
+
+	linkCodeLength, err := strconv.Atoi(os.Getenv("LINK_CODE_LENGTH"))
+	if err != nil {
+		return nil, err
+	}
+
 	return &Config{
 		App: AppConfig{
 			Host:             os.Getenv("HOST"),
-			Port:             toInt(os.Getenv("PORT")),
+			Port:             appPort,
 			Domain:           os.Getenv("DOMAIN"),
-			LinkCodeLength:   toInt(os.Getenv("LINK_CODE_LENGTH")),
+			LinkCodeLength:   linkCodeLength,
 			LinkCodeAlphabet: os.Getenv("LINK_CODE_ALPHABET"),
 		},
 		DB: DBConfig{
 			Host:     os.Getenv("POSTGRES_HOST"),
-			Port:     os.Getenv("POSTGRES_PORT"),
+			Port:     dbPort,
 			Name:     os.Getenv("POSTGRES_DATABASE"),
 			User:     os.Getenv("POSTGRES_USER"),
 			Password: os.Getenv("POSTGRES_PASSWORD"),
 		},
-	}
+	}, nil
 }
