@@ -17,6 +17,15 @@ func isValidDomain(domain string) bool {
 	return re.MatchString(domain)
 }
 
+func isValidURL(url string) bool {
+	re := regexp.MustCompile(
+		`^https?://(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$`,
+	)
+
+	return re.MatchString(url)
+
+}
+
 type LinkService struct {
 	domain       string
 	codeAlphabet string
@@ -43,12 +52,16 @@ func NewLinkService(
 }
 
 func (s *LinkService) ShortenLink(url string) (string, error) {
-	shortCode := utils.GenerateRandomString(s.codeAlphabet, s.codeLength)
+	if !isValidURL(url) {
+		return "", ErrInvalidURL
+	}
 
 	parsedUrl, err := neturl.ParseRequestURI(url)
 	if err != nil {
 		return "", ErrInvalidURL
 	}
+
+	shortCode := utils.GenerateRandomString(s.codeAlphabet, s.codeLength)
 
 	err = s.repo.CreateLink(&models.Link{
 		ShortCode: shortCode,
@@ -75,7 +88,7 @@ func (s *LinkService) ExpandShortLink(url string) (string, error) {
 
 	splitPath := strings.Split(parsedUrl.Path, "/")
 
-	if len(splitPath) != 2 {
+	if len(splitPath) < 2 || len(splitPath) > 3 {
 		return "", ErrInvalidURL
 	}
 
