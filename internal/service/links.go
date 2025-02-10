@@ -1,9 +1,9 @@
 package service
 
 import (
-	"go-url-shortener/internal/models"
-	"go-url-shortener/internal/repository"
-	"go-url-shortener/pkg/utils"
+	"github.com/anijackich/go-url-shortener/internal/models"
+	"github.com/anijackich/go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/pkg/utils"
 	neturl "net/url"
 	"regexp"
 	"strings"

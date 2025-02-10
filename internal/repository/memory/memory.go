@@ -1,8 +1,8 @@
 package memory
 
 import (
-	"go-url-shortener/internal/models"
-	"go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/internal/models"
+	"github.com/anijackich/go-url-shortener/internal/repository"
 	"sync"
 )
 

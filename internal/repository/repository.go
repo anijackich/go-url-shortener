@@ -1,6 +1,6 @@
 package repository
 
-import "go-url-shortener/internal/models"
+import "github.com/anijackich/go-url-shortener/internal/models"
 
 type LinkRepository interface {
 	CreateLink(link *models.Link) error

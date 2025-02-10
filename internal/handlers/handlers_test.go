@@ -3,8 +3,8 @@ package handlers_test
 import (
 	"bytes"
 	"encoding/json"
-	"go-url-shortener/internal/routers"
-	"go-url-shortener/internal/structs"
+	"github.com/anijackich/go-url-shortener/internal/routers"
+	"github.com/anijackich/go-url-shortener/internal/structs"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"go-url-shortener/internal/handlers"
+	"github.com/anijackich/go-url-shortener/internal/handlers"
 )
 
 type MockService struct {

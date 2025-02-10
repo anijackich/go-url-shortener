@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
-	"go-url-shortener/internal/repository/memory"
-	"go-url-shortener/internal/routers"
+	"github.com/anijackich/go-url-shortener/internal/repository/memory"
+	"github.com/anijackich/go-url-shortener/internal/routers"
 	"log"
 
+	"github.com/anijackich/go-url-shortener/api/swagger"
+	"github.com/anijackich/go-url-shortener/internal/config"
+	"github.com/anijackich/go-url-shortener/internal/handlers"
+	"github.com/anijackich/go-url-shortener/internal/service"
 	"github.com/gin-gonic/gin"
-	"go-url-shortener/api/swagger"
-	"go-url-shortener/internal/config"
-	"go-url-shortener/internal/handlers"
-	"go-url-shortener/internal/service"
 )
 
 // @title		URL Shortener API

@@ -3,8 +3,8 @@ package postgres
 import (
 	"errors"
 	"fmt"
-	"go-url-shortener/internal/models"
-	"go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/internal/models"
+	"github.com/anijackich/go-url-shortener/internal/repository"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

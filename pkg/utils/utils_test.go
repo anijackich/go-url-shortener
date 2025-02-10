@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go-url-shortener/pkg/utils"
+	"github.com/anijackich/go-url-shortener/pkg/utils"
 )
 
 type testCase struct {

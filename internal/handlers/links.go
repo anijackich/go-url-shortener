@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"errors"
+	"github.com/anijackich/go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/internal/service"
+	"github.com/anijackich/go-url-shortener/internal/structs"
 	"github.com/gin-gonic/gin"
-	"go-url-shortener/internal/repository"
-	"go-url-shortener/internal/service"
-	"go-url-shortener/internal/structs"
 	"net/http"
 )
 

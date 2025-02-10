@@ -1,10 +1,10 @@
 package swagger
 
 import (
+	_ "github.com/anijackich/go-url-shortener/docs"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "go-url-shortener/docs"
 )
 
 func Setup(r *gin.Engine) {
