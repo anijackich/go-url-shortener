@@ -5,7 +5,15 @@ import (
 	"time"
 )
 
-func GenerateRandomString(alphabet string, length int) string {
+func GenerateRandomString(alphabet string, length int) (string, error) {
+	if length < 1 {
+		return "", ErrInvalidLength
+	}
+
+	if len(alphabet) < 1 {
+		return "", ErrEmptyAlphabet
+	}
+
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	b := make([]byte, length)
@@ -13,5 +21,5 @@ func GenerateRandomString(alphabet string, length int) string {
 		b[i] = alphabet[r.Intn(len(alphabet))]
 	}
 
-	return string(b)
+	return string(b), nil
 }
