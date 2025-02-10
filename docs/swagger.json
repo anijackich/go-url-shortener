@@ -1,0 +1,73 @@
+{
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "URL Shortener API",
+        "contact": {},
+        "version": "0.1.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/expand": {
+            "get": {
+                "description": "Returns a long URL for the specified link",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Expand link",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Short link",
+                        "name": "u",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/shorten": {
+            "post": {
+                "description": "Converts a long URL to a short link",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Shorten link",
+                "parameters": [
+                    {
+                        "description": "Long URL",
+                        "name": "long_url",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/structs.LongLink"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "structs.LongLink": {
+            "type": "object",
+            "properties": {
+                "long_url": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

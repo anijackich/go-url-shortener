@@ -22,6 +22,14 @@ func NewLinkHandler(service LinkServiceInterface) *LinkHandler {
 	return &LinkHandler{service: service}
 }
 
+// ShortenLink
+//
+//	@Summary		Shorten link
+//	@Description	Converts a long URL to a short link
+//	@Accept			json
+//	@Produce		json
+//	@Param			long_url	body	structs.LongLink	true	"Long URL"
+//	@Router			/shorten [post]
 func (h *LinkHandler) ShortenLink(c *gin.Context) {
 	var longLink structs.LongLink
 
@@ -54,6 +62,14 @@ func (h *LinkHandler) ShortenLink(c *gin.Context) {
 	)
 }
 
+// ExpandLink
+//
+//	@Summary		Expand link
+//	@Description	Returns a long URL for the specified link
+//	@Accept			json
+//	@Produce		json
+//	@Param			u	query	string	true	"Short link"
+//	@Router			/expand [get]
 func (h *LinkHandler) ExpandLink(c *gin.Context) {
 	shortLink := c.Query("u")
 
