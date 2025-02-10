@@ -1,0 +1,48 @@
+basePath: /api/v1
+consumes:
+- application/json
+definitions:
+  structs.LongLink:
+    properties:
+      long_url:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: URL Shortener API
+  version: 0.1.0
+paths:
+  /expand:
+    get:
+      consumes:
+      - application/json
+      description: Returns a long URL for the specified link
+      parameters:
+      - description: Short link
+        in: query
+        name: u
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Expand link
+  /shorten:
+    post:
+      consumes:
+      - application/json
+      description: Converts a long URL to a short link
+      parameters:
+      - description: Long URL
+        in: body
+        name: long_url
+        required: true
+        schema:
+          $ref: '#/definitions/structs.LongLink'
+      produces:
+      - application/json
+      responses: {}
+      summary: Shorten link
+produces:
+- application/json
+swagger: "2.0"

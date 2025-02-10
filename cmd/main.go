@@ -2,16 +2,22 @@ package main
 
 import (
 	"fmt"
+	"go-url-shortener/internal/repository/memory"
 	"go-url-shortener/internal/routers"
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"go-url-shortener/api/swagger"
 	"go-url-shortener/internal/config"
 	"go-url-shortener/internal/handlers"
-	"go-url-shortener/internal/repository/memory"
 	"go-url-shortener/internal/service"
 )
 
+// @title		URL Shortener API
+// @version	0.1.0
+// @BasePath	/api/v1
+// @accept		json
+// @produce	json
 func main() {
 	cfg, err := config.LoadConfig()
 	if err != nil {
@@ -34,7 +40,7 @@ func main() {
 		return
 	}
 
-	linkHandler := handlers.NewLinkHandler(*linkService)
+	linkHandler := handlers.NewLinkHandler(linkService)
 
 	r := gin.Default()
 
@@ -42,6 +48,8 @@ func main() {
 
 	v1 := r.Group("/api/v1")
 	routers.SetupLinkRouter(v1, linkHandler)
+
+	swagger.Setup(r)
 
 	err = r.Run(addr)
 	if err != nil {
