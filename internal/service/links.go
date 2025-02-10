@@ -61,7 +61,10 @@ func (s *LinkService) ShortenLink(url string) (string, error) {
 		return "", ErrInvalidURL
 	}
 
-	shortCode := utils.GenerateRandomString(s.codeAlphabet, s.codeLength)
+	shortCode, err := utils.GenerateRandomString(s.codeAlphabet, s.codeLength)
+	if err != nil {
+		return "", err
+	}
 
 	err = s.repo.CreateLink(&models.Link{
 		ShortCode: shortCode,
