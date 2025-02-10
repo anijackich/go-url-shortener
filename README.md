@@ -14,6 +14,51 @@ Simple Go API application for URL shortener service.
 - [x] In-memory storage
 - [x] PostgreSQL storage
 
+## 🕹️ Play with Demo
+
+The application is deployed on [ozon.anjk.ru](https://ozon.anjk.ru/api/v1), and you can try to interact with it
+through [Swagger](https://ozon.anjk.ru/swagger/index.html).
+
+### `POST` `/api/v1/shorten`
+
+#### Shorten link
+
+> Converts a long URL to a short link
+
+#### Request body
+
+```json
+{
+  "long_url": "https://some-very-very.com/very/very/long/url"
+}
+```
+
+#### Response body
+
+```json
+{
+  "short_url": "https://example.com/a1b2c3d4e5"
+}
+```
+
+### `GET` `/api/v1/expand?u=<short_url>`
+
+#### Expand link
+
+> Returns a long URL for the specified short link
+
+#### Request params
+
+`u`: `https://example.com/a1b2c3d4e5`
+
+#### Response body
+
+```json
+{
+  "long_url": "https://some-very-very.com/very/very/long/url"
+}
+```
+
 ## ⬇️ Clone & Setup
 
 1. Clone this repository
@@ -37,7 +82,7 @@ Simple Go API application for URL shortener service.
 4. Set environment variables
 
    | Variable             | Description                                         |
-   |----------------------|-----------------------------------------------------|
+                     |----------------------|-----------------------------------------------------|
    | `HOST`               | Host serving the API                                |
    | `PORT`               | Port serving the API                                |
    | `DOMAIN`             | Base domain for shortened links                     |
