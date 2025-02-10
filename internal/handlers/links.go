@@ -9,11 +9,16 @@ import (
 	"net/http"
 )
 
-type LinkHandler struct {
-	service service.LinkService
+type LinkServiceInterface interface {
+	ShortenLink(url string) (string, error)
+	ExpandShortLink(url string) (string, error)
 }
 
-func NewLinkHandler(service service.LinkService) *LinkHandler {
+type LinkHandler struct {
+	service LinkServiceInterface
+}
+
+func NewLinkHandler(service LinkServiceInterface) *LinkHandler {
 	return &LinkHandler{service: service}
 }
 
