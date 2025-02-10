@@ -7,6 +7,11 @@ definitions:
       long_url:
         type: string
     type: object
+  structs.ShortenedLink:
+    properties:
+      short_url:
+        type: string
+    type: object
 info:
   contact: {}
   title: URL Shortener API
@@ -25,8 +30,14 @@ paths:
         type: string
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: Long link
+          schema:
+            $ref: '#/definitions/structs.LongLink'
       summary: Expand link
+      tags:
+      - Links
   /shorten:
     post:
       consumes:
@@ -41,8 +52,14 @@ paths:
           $ref: '#/definitions/structs.LongLink'
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: Shortened link
+          schema:
+            $ref: '#/definitions/structs.ShortenedLink'
       summary: Shorten link
+      tags:
+      - Links
 produces:
 - application/json
 swagger: "2.0"

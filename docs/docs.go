@@ -30,6 +30,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Links"
+                ],
                 "summary": "Expand link",
                 "parameters": [
                     {
@@ -40,7 +43,14 @@ const docTemplate = `{
                         "required": true
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Long link",
+                        "schema": {
+                            "$ref": "#/definitions/structs.LongLink"
+                        }
+                    }
+                }
             }
         },
         "/shorten": {
@@ -51,6 +61,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Links"
                 ],
                 "summary": "Shorten link",
                 "parameters": [
@@ -64,7 +77,14 @@ const docTemplate = `{
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Shortened link",
+                        "schema": {
+                            "$ref": "#/definitions/structs.ShortenedLink"
+                        }
+                    }
+                }
             }
         }
     },
@@ -73,6 +93,14 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "long_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "structs.ShortenedLink": {
+            "type": "object",
+            "properties": {
+                "short_url": {
                     "type": "string"
                 }
             }
