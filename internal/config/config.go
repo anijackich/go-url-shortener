@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 	"strconv"
 
@@ -30,10 +29,7 @@ type Config struct {
 }
 
 func LoadConfig() (*Config, error) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalln("No .env file found")
-	}
+	_ = godotenv.Load()
 
 	appPort, err := strconv.Atoi(os.Getenv("PORT"))
 	if err != nil {
