@@ -22,6 +22,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Links"
+                ],
                 "summary": "Expand link",
                 "parameters": [
                     {
@@ -32,7 +35,14 @@
                         "required": true
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Long link",
+                        "schema": {
+                            "$ref": "#/definitions/structs.LongLink"
+                        }
+                    }
+                }
             }
         },
         "/shorten": {
@@ -43,6 +53,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Links"
                 ],
                 "summary": "Shorten link",
                 "parameters": [
@@ -56,7 +69,14 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Shortened link",
+                        "schema": {
+                            "$ref": "#/definitions/structs.ShortenedLink"
+                        }
+                    }
+                }
             }
         }
     },
@@ -65,6 +85,14 @@
             "type": "object",
             "properties": {
                 "long_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "structs.ShortenedLink": {
+            "type": "object",
+            "properties": {
+                "short_url": {
                     "type": "string"
                 }
             }
