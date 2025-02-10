@@ -2,9 +2,9 @@ package service_test
 
 import (
 	"fmt"
-	"go-url-shortener/internal/models"
-	"go-url-shortener/internal/repository"
-	"go-url-shortener/internal/service"
+	"github.com/anijackich/go-url-shortener/internal/models"
+	"github.com/anijackich/go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/internal/service"
 	"net/url"
 	"testing"
 

@@ -1,16 +1,19 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"go-url-shortener/internal/repository/memory"
-	"go-url-shortener/internal/routers"
+	"github.com/anijackich/go-url-shortener/internal/repository"
+	"github.com/anijackich/go-url-shortener/internal/repository/memory"
+	"github.com/anijackich/go-url-shortener/internal/repository/postgres"
+	"github.com/anijackich/go-url-shortener/internal/routers"
 	"log"
 
+	"github.com/anijackich/go-url-shortener/api/swagger"
+	"github.com/anijackich/go-url-shortener/internal/config"
+	"github.com/anijackich/go-url-shortener/internal/handlers"
+	"github.com/anijackich/go-url-shortener/internal/service"
 	"github.com/gin-gonic/gin"
-	"go-url-shortener/api/swagger"
-	"go-url-shortener/internal/config"
-	"go-url-shortener/internal/handlers"
-	"go-url-shortener/internal/service"
 )
 
 // @title		URL Shortener API
@@ -19,6 +22,12 @@ import (
 // @accept		json
 // @produce	json
 func main() {
+	storage := flag.String(
+		"storage", "",
+		"Storage type [memory/postgres]",
+	)
+	flag.Parse()
+
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("Cannot load config: %s", err.Error())
@@ -27,7 +36,26 @@ func main() {
 
 	addr := fmt.Sprintf("%s:%d", cfg.App.Host, cfg.App.Port)
 
-	linkRepo := memory.NewLinkRepository()
+	var linkRepo repository.LinkRepository
+	switch *storage {
+	case "memory":
+		linkRepo = memory.NewLinkRepository()
+	case "postgres":
+		linkRepo, err = postgres.NewLinkRepository(
+			cfg.DB.Host,
+			cfg.DB.Port,
+			cfg.DB.User,
+			cfg.DB.Password,
+			cfg.DB.Name,
+		)
+		if err != nil {
+			log.Fatalf("Cannot load postgres repo: %s", err.Error())
+			return
+		}
+	default:
+		log.Fatal("Storage type is incorrect or not specified")
+		return
+	}
 
 	linkService, err := service.NewLinkService(
 		cfg.App.Domain,

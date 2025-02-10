@@ -1,8 +1,8 @@
 package routers
 
 import (
+	"github.com/anijackich/go-url-shortener/internal/handlers"
 	"github.com/gin-gonic/gin"
-	"go-url-shortener/internal/handlers"
 )
 
 func SetupLinkRouter(

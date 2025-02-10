@@ -1,0 +1,11 @@
+.git
+.idea
+
+.github
+.gitignore
+
+.env
+.env.example
+
+*.md
+LICENSE
