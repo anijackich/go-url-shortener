@@ -82,7 +82,7 @@ through [Swagger](https://ozon.anjk.ru/swagger/index.html).
 4. Set environment variables
 
    | Variable             | Description                                         |
-                     |----------------------|-----------------------------------------------------|
+   |----------------------|-----------------------------------------------------|
    | `HOST`               | Host serving the API                                |
    | `PORT`               | Port serving the API                                |
    | `DOMAIN`             | Base domain for shortened links                     |
