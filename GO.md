@@ -5,7 +5,7 @@
 ### Memory implementation
 
 A bidirectional hashmap was used for the solution, as it allows checking for the existence of a link both from the
-original url and from the shortened one code.
+original url and from the shortened one code in the optimal time.
 
 ```go
 type LinkRepository struct {
