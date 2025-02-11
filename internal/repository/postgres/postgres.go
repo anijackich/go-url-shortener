@@ -39,7 +39,10 @@ func NewLinkRepository(
 
 func (r *LinkRepository) CreateLink(link *models.Link) error {
 	if err := r.db.Create(link).Error; err != nil {
-		if errors.Is(err, gorm.ErrDuplicatedKey) {
+		if errors.Is(
+			r.db.Dialector.(gorm.ErrorTranslator).Translate(err),
+			gorm.ErrDuplicatedKey,
+		) {
 			return repository.ErrLinkAlreadyExists
 		}
 		return err
