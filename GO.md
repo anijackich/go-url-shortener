@@ -9,9 +9,9 @@ original url and from the shortened one code.
 
 ```go
 type LinkRepository struct {
-linksByCode map[string]*models.Link
-codesByUrl  map[string]string
-...
+	linksByCode map[string]*models.Link
+	codesByUrl  map[string]string
+	...
 }
 ```
 
@@ -22,9 +22,9 @@ which allows to achieve the same effect.
 
 ```go
 type Link struct {
-...
-ShortCode string `gorm:"uniqueIndex;not null"`
-URL       string `gorm:"uniqueIndex;not null"`
+	...
+	ShortCode string `gorm:"uniqueIndex;not null"`
+	URL       string `gorm:"uniqueIndex;not null"`
 }
 ```
 
