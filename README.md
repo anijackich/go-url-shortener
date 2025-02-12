@@ -111,6 +111,8 @@ Once selected, replace `<STORAGE>` in following commands with one of these value
 docker run -it -p 8080:8080 --env-file .env anijack/go-url-shortener --storage <STORAGE>
 ```
 
+Server will start on `localhost:8080`
+
 ### Run using Docker Compose (with PostgreSQL)
 
 ```shell
@@ -137,6 +139,8 @@ make build
 ```shell
 make run STORAGE=<STORAGE>
 ```
+
+Server is listening and serving on `localhost:8080`
 
 ## ✔️ Code quality
 
